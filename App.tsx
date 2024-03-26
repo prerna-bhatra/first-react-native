@@ -27,7 +27,7 @@ type SectionProps = PropsWithChildren<{
 }>;
 
 function App(): React.JSX.Element {
-  console.log({ base: REACT_APP_BASE_LOCAL_URL });
+  // console.log({ base: REACT_APP_BASE_LOCAL_URL });
 
   const isDarkMode = useColorScheme() === 'dark';
 

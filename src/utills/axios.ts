@@ -1,11 +1,11 @@
 import axios from "axios";
 import {REACT_APP_BASE_LOCAL_URL} from "@env"
 
-const baseUrl = '';
+const baseUrl = REACT_APP_BASE_LOCAL_URL;
 
-// console.log({b:process.env.REACT_APP_BASE_LOCAL_URL,baseUrl});
+console.log({baseUrl});
 
 
 export const axiosInstance = axios.create({
-  baseURL: `${baseUrl}/`,
+  baseURL: `${baseUrl}/api`,
 });

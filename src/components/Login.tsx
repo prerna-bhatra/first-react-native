@@ -1,6 +1,9 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { login } from '../Redux/actions';
+
 
 const LoginForm = (props: any) => {
   const { control, handleSubmit, formState: { errors } } = useForm();

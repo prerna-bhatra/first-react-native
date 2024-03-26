@@ -19,12 +19,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/components/Home';
 import LoginForm from './src/components/Login';
+import { REACT_APP_BASE_LOCAL_URL } from "@env"
+
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
 function App(): React.JSX.Element {
+  console.log({ base: REACT_APP_BASE_LOCAL_URL });
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -37,10 +41,11 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Signup">
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
           name="Login"
           component={LoginForm}
-          // options={{ title: 'Welcome' }}
+        // options={{ title: 'Welcome' }}
         />
         <Stack.Screen name="Signup" component={SignupForm} />
       </Stack.Navigator>

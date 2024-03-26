@@ -1,12 +1,22 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ISignup } from '../interfaces/autInterfaces';
+import { signup } from '../services/authService';
 
 const SignupForm = (props: any) => {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors } } = useForm<ISignup>();
 
-  const onSubmit = (data: any) => {
-    console.log(data); // Handle form submission here
+  const onSubmit = async(data: ISignup) => {
+    console.log(data);
+    try {
+      const response = await signup(data);
+      console.log({response});
+      
+    } catch (error) {
+        console.log("err",error);
+        
+    }
   };
 
   return (
@@ -45,7 +55,7 @@ const SignupForm = (props: any) => {
         rules={{ required: true }}
       />
       {errors.email && <Text style={styles.error}>Email  is required.</Text>}
-      <Controller
+      {/* <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
@@ -61,7 +71,7 @@ const SignupForm = (props: any) => {
         name="phone"
         rules={{ required: true }}
       />
-      {errors.phone && <Text style={styles.error}>Phone number is required.</Text>}
+      {errors.phone && <Text style={styles.error}>Phone number is required.</Text>} */}
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
@@ -83,8 +93,8 @@ const SignupForm = (props: any) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit(onSubmit)}>
           <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>      
-        </View>
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.inlineContainer}>
         <Text style={styles.loginText}>Already have an account?</Text>
@@ -99,7 +109,7 @@ const styles = StyleSheet.create({
   heading: {
     color: 'black',
     fontSize: 30,
-    fontWeight:'bold'
+    fontWeight: 'bold'
   },
   container: {
     justifyContent: 'center',
@@ -138,12 +148,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white', // Example text color
     textAlign: 'center', // Center text within the button
-    fontWeight:'bold'
+    fontWeight: 'bold'
   },
   loginText: {
     color: 'black',
-    marginRight:5,
-    fontSize:18
+    marginRight: 5,
+    fontSize: 18
   }
 });
 
